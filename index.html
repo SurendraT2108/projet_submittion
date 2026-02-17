@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Submission Portal</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background: linear-gradient(135deg, #3a0ca3, #7209b7, #4361ee);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            width: 420px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to   {opacity: 1; transform: translateY(0);}
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="text"], input[type="url"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+        }
+
+        #dropZone {
+            padding: 30px;
+            border: 2px dashed #fff;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #dropZone:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #ffbe0b;
+            color: #000;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #faa307;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Project Submission</h2>
+
+    <form id="uploadForm">
+
+        <div class="input-field">
+            <label>GitHub Live Host Link:</label>
+            <input type="url" id="githubLink" placeholder="https://username.github.io/project" required>
+        </div>
+
+        <div class="input-field">
+            <label>Upload PowerPoint (PPT/PPTX):</label>
+            <div id="dropZone">Drag & Drop PPT Here<br>or Click to Select</div>
+            <input type="file" id="pptFile" accept=".ppt,.pptx" style="display:none;" required>
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+<script>
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("pptFile");
+
+    dropZone.addEventListener("click", () => fileInput.click());
+
+    dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.style.background = "rgba(255,255,255,0.3)";
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+        dropZone.style.background = "rgba(255,255,255,0.1)";
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        fileInput.files = e.dataTransfer.files;
+        dropZone.innerHTML = "File Selected: " + fileInput.files[0].name;
+    });
+
+    document.getElementById("uploadForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const githubLink = document.getElementById("githubLink").value;
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Upload PPT file.");
+            return;
+        }
+
+        alert("Submitted Successfully!\nGitHub Link: " + githubLink + "\nFile: " + file.name);
+    });
+</script>
+
+</body>
+</html>
