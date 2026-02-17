@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Submission Portal</title>
 
     <style>
@@ -95,6 +95,23 @@
 
     <form id="uploadForm">
 
+        <!-- NEW FIELDS ADDED -->
+        <div class="input-field">
+            <label>College Name:</label>
+            <input type="text" id="collegeName" placeholder="Enter College Name" required>
+        </div>
+
+        <div class="input-field">
+            <label>Team Leader Name:</label>
+            <input type="text" id="leaderName" placeholder="Enter Team Leader Name" required>
+        </div>
+
+        <div class="input-field">
+            <label>Team Name:</label>
+            <input type="text" id="teamName" placeholder="Enter Team Name" required>
+        </div>
+        <!-- END NEW FIELDS -->
+
         <div class="input-field">
             <label>GitHub Live Host Link:</label>
             <input type="url" id="githubLink" placeholder="https://username.github.io/project" required>
@@ -135,6 +152,9 @@
     document.getElementById("uploadForm").addEventListener("submit", (e) => {
         e.preventDefault();
 
+        const college = document.getElementById("collegeName").value;
+        const leader = document.getElementById("leaderName").value;
+        const team = document.getElementById("teamName").value;
         const githubLink = document.getElementById("githubLink").value;
         const file = fileInput.files[0];
 
@@ -143,7 +163,14 @@
             return;
         }
 
-        alert("Submitted Successfully!\nGitHub Link: " + githubLink + "\nFile: " + file.name);
+        alert(
+            "Submitted Successfully!\n" +
+            "College: " + college + "\n" +
+            "Team Leader: " + leader + "\n" +
+            "Team Name: " + team + "\n" +
+            "GitHub Link: " + githubLink + "\n" +
+            "File: " + file.name
+        );
     });
 </script>
 
